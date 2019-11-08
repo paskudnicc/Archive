@@ -16,7 +16,7 @@ int main() {
         }
         shifts[0][i] = c;
     }
-    
+
     for (int i = 1; i < len; ++i) {
         for (int j = 0; j < len; j++) {
             shifts[i][j] = shifts[0][(j + i) % len];

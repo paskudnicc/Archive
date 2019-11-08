@@ -3,4 +3,7 @@ project(DM_Lab2 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(DM_Lab2 A.c)
+add_executable(A A.c)
+add_executable(B B.c)
+add_executable(C C.c)
+add_executable(D D.c)
