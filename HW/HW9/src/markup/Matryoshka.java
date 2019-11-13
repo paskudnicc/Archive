@@ -2,49 +2,36 @@ package markup;
 
 import java.util.List;
 
-abstract class Matryoshka {
-    List<Object> content;
-    Type type;
+abstract class Matryoshka implements ToAnything {
+    List<ToAnything> content;
+    Tags tags;
 
-    public Matryoshka(List<Object> content){
+    public Matryoshka(List<ToAnything> content, Tags tags){
         this.content = content;
-    }
-
-    public Matryoshka(List<Object> content, Type type){
-        this.content = content;
-        this.type = type;
+        this.tags = tags;
     }
 
     public void toMarkdown(StringBuilder sb) {
-        recursiveMarkdown(sb.append(type.md));
-        sb.append(type.md);
+        sb.append(tags.md);
+        for (ToAnything c : content) {
+            c.toMarkdown(sb);
+        }
+        sb.append(tags.md);
     }
 
     public void toTex(StringBuilder sb) {
-        recursiveTex(sb.append("\\").append(type.tex).append("{"));
-        sb.append("}");
+        sb.append(tags.texStart);
+        for (ToAnything c : content) {
+            c.toTex(sb);
+        }
+        sb.append(tags.texEnd);
     }
 
     public void toHtml(StringBuilder sb) {
-        recursiveHtml(sb.append(Tag.startTag(type.html)));
-        sb.append(Tag.endTag(type.html));
-    }
-
-    public void recursiveMarkdown(StringBuilder sb) {
-        for (Object c : content){
-            ((Matryoshka) c).toMarkdown(sb);
+        sb.append(tags.htmlStart);
+        for (ToAnything c : content) {
+            c.toHtml(sb);
         }
-    }
-
-    public void recursiveTex(StringBuilder sb) {
-        for (Object c : content){
-            ((Matryoshka) c).toTex(sb);
-        }
-    }
-
-    public void recursiveHtml(StringBuilder sb) {
-        for (Object c : content){
-            ((Matryoshka) c).toHtml(sb);
-        }
+        sb.append(tags.htmlEnd);
     }
 }

@@ -1,22 +1,20 @@
 package markup;
 
-import java.util.List;
-
-public class Text extends Matryoshka{
-
-    public Text(String str){
-        super(List.of(str));
+public class Text implements ToAnything{
+    String content;
+    public Text(String str) {
+        this.content = str;
     }
 
     public void toMarkdown(StringBuilder sb) {
-        sb.append(content.get(0));
+        sb.append(content);
     }
 
     public void toTex (StringBuilder sb) {
-        sb.append(content.get(0));
+        sb.append(content);
     }
 
     public void toHtml(StringBuilder sb) {
-        sb.append(content.get(0));
+        sb.append(content);
     }
 }
