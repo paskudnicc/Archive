@@ -40,6 +40,34 @@ class Matrix:
                 k += 1
         return nums
 
+    def cut_matrix(self, from_str, from_col, to_str, to_col):
+        assert to_str < self.size[0] and to_col < self.size[1]
+        n = to_str - from_str
+        m = to_col - from_col
+        new_m = Matrix(n, m)
+        for i in range(n):
+            for j in range(m):
+                new_m.__matrix[i][j] = self.__matrix[i + from_str][j + from_col]
+        return new_m
+
+    def det(self):
+        assert self.size[0] == self.size[1]
+        if self.size[0] == 2:
+            return self.__matrix[0][0] * self.__matrix[1][1] - self.__matrix[0][1] * self.__matrix[1][0]
+        answ = 0
+        for k in range(self.size[0]):
+            temp = Matrix(self.size[0] - 1, self.size[1] - 1)
+            for i in range(self.size[0]):
+                if i == k:
+                    continue
+                for j in range(0, self.size[1] - 1):
+                    if i > k:
+                        temp.__matrix[i - 1][j] = self.__matrix[i][j + 1]
+                    else:
+                        temp.__matrix[i][j] = self.__matrix[i][j + 1]
+            answ += (self.__matrix[k][0] * temp.det() * (-1) ** (k % 2))
+        return answ
+
 
 def matr_sum(a, b):
     assert a.size == b.size
