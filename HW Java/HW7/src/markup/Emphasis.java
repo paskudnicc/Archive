@@ -2,8 +2,8 @@ package markup;
 
 import java.util.List;
 
-public class Emphasis extends Matryoshka {
-    public Emphasis(List content) {
-        super(content, new Tags("*", "\\emph{", "}", "em"));
+public class Emphasis extends AbstractElement implements Primitive {
+    public Emphasis(List<Primitive> content) {
+        super(content,"*", "emph");
     }
 }

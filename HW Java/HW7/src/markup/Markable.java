@@ -1,5 +1,4 @@
 package markup;
 
-public interface Markable {
-    void toMarkdown(StringBuilder sb);
+public interface Markable extends Texable, Markdownable {
 }

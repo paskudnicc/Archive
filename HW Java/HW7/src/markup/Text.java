@@ -1,7 +1,8 @@
 package markup;
 
-public class Text  implements Markable, Texable, Htmlable {
-    String content;
+public class Text implements Primitive {
+    private String content;
+
     public Text(String str) {
         this.content = str;
     }
@@ -11,10 +12,6 @@ public class Text  implements Markable, Texable, Htmlable {
     }
 
     public void toTex (StringBuilder sb) {
-        sb.append(content);
-    }
-
-    public void toHtml(StringBuilder sb) {
         sb.append(content);
     }
 }

@@ -19,6 +19,9 @@ class Vector:
         self.y *= k
         self.z *= k
 
+    def __str__(self):
+        return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
+
 
 def vector_sum(a, b):
     return Vector(a.x + b.x, a.y + b.y, a.z + b.z)
@@ -44,27 +47,42 @@ def comb_product(a, b, c):
     return dot_product(a, cross_product(b, c))
 
 
-x = cross_product(Vector(-1, 7/4, 3/4), Vector(1, 1, 6))
-print(x.x, x.y, x.z)
-print(degrees(acos(-cos(radians(50)))))
-print(radians(60))
+def findcos(a, b):
+    return dot_product(a, b)/(a.len() * b.len())
+
+
 vx, vy = map(int, input().split())
 ov = Vector(vx, vy, 0)
 ax, ay = map(int, input().split())
 va = Vector(ax, ay, 0)
 mx, my = map(int, input().split())
 vm = Vector(mx, my, 1)
+prm = Vector(mx, my, 0)
 wx, wy = map(int, input().split())
 ow = Vector(wx, wy, 0)
 
-vw = vector_sum(ov, vector_mul_by_k(ow, -1))
-beta = acos(dot_product(vw, va))
+vw = vector_sum(vector_mul_by_k(ov, -1), ow)
 
-if degrees(acos(cos_a)) > 60:
-    answ = "0"
-elif comb_product(vw, va, Vector(0,0,1)) > 0:
-    answ = "-1"
+beta = degrees(acos(findcos(vw, va)))
+
+if beta > 90:
+    beta = beta - 90
 else:
-    answ = "1"
+    beta = 90 - beta
+
+if prm.len() != 0:
+    gamma = degrees(acos(findcos(vm, prm)))
+else:
+    gamma = 90
+
+if beta > 60 or gamma < 30:
+    print(0)
+elif comb_product(vw, va, Vector(0, 0, 1)) > 0:
+    print(-1)
+else:
+    print(1)
 
 
+print(round(beta, 2))
+print(round(90 - gamma, 2))
+print("Я стреляю сигареты раздаю бомжам")
