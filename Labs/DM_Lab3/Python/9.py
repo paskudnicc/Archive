@@ -3,7 +3,6 @@ import sys
 sys.stdin = open('brackets.in', 'r')
 sys.stdout = open('brackets.out', 'w')
 
-
 n = int(input())
 ans = []
 
