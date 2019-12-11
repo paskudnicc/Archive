@@ -1,6 +1,5 @@
 package ticTacToe;
 
-
 public interface Board {
     Position getPosition();
 

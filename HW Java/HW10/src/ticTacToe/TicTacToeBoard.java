@@ -62,10 +62,10 @@ public class TicTacToeBoard implements Board, Position {
 
     public Result makeMove(final Move move) {
         if (!isValid(move)) {
-            return Result.LOSE;
+            return Result.BROKEN;
         }
         t -= 1;
-        if (t < 0) {
+        if (t == 0) {
             return Result.DRAW;
         }
         int r = move.getRow();

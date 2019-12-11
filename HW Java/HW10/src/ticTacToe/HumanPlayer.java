@@ -27,7 +27,7 @@ public class HumanPlayer implements Player {
             if (position.isValid(move)) {
                 return move;
             }
-            out.println("U stupid do it again");
+            out.println("U r stupid do it again");
         }
     }
 }
