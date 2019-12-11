@@ -6,7 +6,7 @@ int main()
     freopen("num2perm.in", "r", stdin);
     freopen("num2perm.out", "w", stdout);
     long long i, n, nn, col, t, tt;
-    cin >> n >> i;
+    cin >> n;
     n--;
     nn = n + 1;
     long long fast_fact[nn + 1];
@@ -14,6 +14,7 @@ int main()
     for (i = 1; i <= nn; i++)
         fast_fact[i] = i * fast_fact[i -1];
     bool num[nn];
+    cin >> i;
     memset(num, 0, nn);
     for (col = n; col > 0; col--)
     {
