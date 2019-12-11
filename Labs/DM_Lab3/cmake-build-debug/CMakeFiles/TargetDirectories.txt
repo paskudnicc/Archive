@@ -1,4 +1,0 @@
-/home/kruxx/git/Study/Labs/DM_Lab3/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/kruxx/git/Study/Labs/DM_Lab3/cmake-build-debug/CMakeFiles/7.dir
-/home/kruxx/git/Study/Labs/DM_Lab3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kruxx/git/Study/Labs/DM_Lab3/cmake-build-debug/CMakeFiles/10.dir
