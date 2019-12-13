@@ -1,9 +1,11 @@
 package ticTacToe;
 
+import java.util.Scanner;
+
 public class Game {
     private final boolean log;
     private final Player[] players;
-
+    Scanner in = new Scanner(System.in);
     public Game(final Player[] players, boolean log) {
         this.log = log;
         this.players = players;

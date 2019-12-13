@@ -18,6 +18,7 @@ public class HumanPlayer implements Player {
     }
 
     public Move move(final Position position, final CellType cell) {
+
         out.println(cell + "'s move");
         while (true) {
             try {

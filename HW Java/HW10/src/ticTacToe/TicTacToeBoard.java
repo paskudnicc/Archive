@@ -35,12 +35,7 @@ public class TicTacToeBoard implements Board, Position {
         this.m = m;
         this.t = t;
         this.k = k;
-        this.cells = new Cell[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                this.cells[i][j] = new Cell(cells[i][j].getType(), i, j);
-            }
-        }
+        this.cells = cells;
         this.turn = turn;
     }
 
@@ -77,19 +72,17 @@ public class TicTacToeBoard implements Board, Position {
                     continue;
                 }
                 if (cells[r + i][c + j].getType() == turn) {
-                    int newCells;
+                    int newCells = 1;
                     if (okRow(r - i) && okCol(c - j) && cells[r - i][c - j].getType() == turn) {
-                        newCells = cells[r - i][c - j].getNeighbour(-i, -j) + 1;
-                    } else {
-                        newCells = 1;
+                        newCells += cells[r - i][c - j].getNeighbour(-i, -j) + 1;
                     }
                     int rLine = r + i;
                     int cLine = c + j;
-                    if (cells[rLine][cLine].getNeighbour(i, j) + newCells >= k - 1) {
+                    if (cells[rLine][cLine].getNeighbour(i, j) + newCells + 1 >= k) {
                         return Result.WIN;
                     }
                     cells[r][c].setNeighbour(i, j, cells[rLine][cLine].getNeighbour(i, j) + 1);
-                    for (int z = 0; z < cells[r][c].getNeighbour(i, j); z++) {
+                    while (okRow(rLine) && okCol(cLine) && cells[rLine][cLine].getType() == turn) {
                         cells[rLine][cLine].setNeighbour(-i, -j, cells[rLine][cLine].getNeighbour(-i, -j) + newCells);
                         rLine = rLine + i;
                         cLine = cLine + j;

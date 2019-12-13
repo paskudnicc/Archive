@@ -49,7 +49,7 @@ public class Cell {
     }
 
     public void setNeighbour(int i, int j, int x) {
-        neighbours[toCode(i, j)] += x;
+        neighbours[toCode(i, j)] = x;
     }
 
     public int getNeighbour(int i, int j) {

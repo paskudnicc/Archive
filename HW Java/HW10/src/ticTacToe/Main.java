@@ -40,7 +40,7 @@ public class Main {
                 }
             } catch (Exception e) {}
         }
-        System.out.println("For each player: h/b (human/bot)???");
+        System.out.println("For each player: h/b/2 (human/bot/bot v.2)???");
         Player[] playerType = new Player[players];
         for (int i = 1; i <= players; i++) {
             while (true) {
@@ -52,6 +52,9 @@ public class Main {
                     break;
                 } else if (c == 'b') {
                     playerType[i - 1] = new BotPlayer(n, m, k);
+                    break;
+                } else if (c == '2') {
+                    playerType[i - 1] = new BotPlayerV2(n, m, k);
                     break;
                 }
             }
