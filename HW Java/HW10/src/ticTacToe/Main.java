@@ -20,14 +20,14 @@ public class Main {
                 n = in.nextInt();
                 m = in.nextInt();
                 k = in.nextInt();
-                if (n < 2 || m < 2) {
+                if (n < 2 || m < 2 || k < 2) {
                     System.out.println("Too small");
                 } else if (k > Integer.max(n, m)) {
                     System.out.println("k is too big. Impossible to win");
                 } else {
                     break;
                 }
-            } catch (IOException e) {}
+            } catch (Exception e) {}
         }
         while (true) {
             System.out.println("How many players?");
@@ -38,7 +38,7 @@ public class Main {
                 } else {
                     System.out.println("Sorry, but no");
                 }
-            } catch (IOException e) {}
+            } catch (Exception e) {}
         }
         System.out.println("For each player: h/b (human/bot)???");
         Player[] playerType = new Player[players];
@@ -51,7 +51,7 @@ public class Main {
                     playerType[i - 1] = new HumanPlayer();
                     break;
                 } else if (c == 'b') {
-                    playerType[i - 1] = new RandomPlayer(n, m);
+                    playerType[i - 1] = new BotPlayer(n, m, k);
                     break;
                 }
             }
@@ -66,12 +66,11 @@ public class Main {
                 } else {
                     System.out.println("What is wrong with you?");
                 }
-            } catch (IOException e) {}
+            } catch (Exception e) {}
         }
-        final Game game = new Game(playerType);
+        final Game game = new Game(playerType, true);
         int result;
         int[] score = new int[players];
-        Arrays.fill(score, 0);
         int i = 0;
         while (i < Integer.MAX_VALUE) {
             for (int j = 0; j < players; j++) {
@@ -85,6 +84,9 @@ public class Main {
                 score[result - 1]++;
                 if (score[result - 1] == matches) {
                     System.out.println("Game ENDED");
+                    for (int j = 0; j < players; j++) {
+                        System.out.println("Player " + (j + 1) + ": Score: " + score[j]);
+                    }
                     System.out.println("Player " + result + " is too good");
                     break;
                 }

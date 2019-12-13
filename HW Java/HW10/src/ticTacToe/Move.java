@@ -3,9 +3,9 @@ package ticTacToe;
 public final class Move {
     private final int row;
     private final int column;
-    private final Cell value;
+    private final CellType value;
 
-    public Move(final int row, final int column, final Cell value) {
+    public Move(final int row, final int column, final CellType value) {
         this.row = row;
         this.column = column;
         this.value = value;
@@ -19,12 +19,12 @@ public final class Move {
         return column;
     }
 
-    public Cell getValue() {
+    public CellType getValue() {
         return value;
     }
 
     @Override
     public String toString() {
-        return "row=" + row + ", column=" + column + ", value=" + value;
+        return "row=" + row + ", column=" + column + ", symbol=" + value;
     }
 }

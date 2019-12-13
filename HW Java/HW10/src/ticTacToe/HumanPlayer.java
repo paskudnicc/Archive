@@ -17,16 +17,16 @@ public class HumanPlayer implements Player {
         this(System.out, new Scanner(System.in));
     }
 
-    public Move move(final Position position, final Cell cell) {
-        out.println("Position");
-        out.println(position);
+    public Move move(final Position position, final CellType cell) {
         out.println(cell + "'s move");
         while (true) {
-            out.println("Enter row and column");
-            final Move move = new Move(in.nextInt(), in.nextInt(), cell);
-            if (position.isValid(move)) {
-                return move;
-            }
+            try {
+                out.println("Enter row and column");
+                final Move move = new Move(in.nextInt(), in.nextInt(), cell);
+                if (position.isValid(move)) {
+                    return move;
+                }
+            } catch (Exception e) {}
             out.println("U r stupid do it again");
         }
     }

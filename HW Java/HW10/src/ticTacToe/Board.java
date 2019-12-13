@@ -3,7 +3,9 @@ package ticTacToe;
 public interface Board {
     Position getPosition();
 
-    Cell getCell();
+    CellType getTurn();
 
     Result makeMove(Move move);
+
+    Board copyOf();
 }
