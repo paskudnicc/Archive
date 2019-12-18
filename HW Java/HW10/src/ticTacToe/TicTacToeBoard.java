@@ -1,8 +1,5 @@
 package ticTacToe;
 
-import java.util.Arrays;
-import java.util.Map;
-
 public class TicTacToeBoard implements Board, Position {
     private Cell[][] cells;
     private CellType turn;
@@ -11,6 +8,12 @@ public class TicTacToeBoard implements Board, Position {
     private final int players;
 
     public TicTacToeBoard(int n, int m, int k, int players) {
+        if (!(players > 1 &&
+            players < 5 &&
+            n > 1 &&
+            m > 1 &&
+            k > 1 &&
+            k <= Integer.max(n, m))) throw new IllegalArgumentException("Invalid board parameters");
         this.players = players;
         this.n = n;
         this.m = m;
@@ -25,22 +28,8 @@ public class TicTacToeBoard implements Board, Position {
         turn = CellType.X;
     }
 
-    public Board copyOf() {
-        return new TicTacToeBoard(cells, n, m, k, turn, players, t);
-    }
-
-    private TicTacToeBoard(Cell[][] cells, int n, int m, int k, CellType turn, int players, int t) {
-        this.players = players;
-        this.n = n;
-        this.m = m;
-        this.t = t;
-        this.k = k;
-        this.cells = cells;
-        this.turn = turn;
-    }
-
-    public Position getPosition() {
-        return this;
+    public LockedPosition getPosition() {
+        return new LockedPosition(this);
     }
 
     public CellType getTurn() {
@@ -63,6 +52,7 @@ public class TicTacToeBoard implements Board, Position {
         if (t == 0) {
             return Result.DRAW;
         }
+        boolean win = false;
         int r = move.getRow();
         int c = move.getColumn();
         cells[r][c].setType(move.getValue());
@@ -79,7 +69,7 @@ public class TicTacToeBoard implements Board, Position {
                     int rLine = r + i;
                     int cLine = c + j;
                     if (cells[rLine][cLine].getNeighbour(i, j) + newCells + 1 >= k) {
-                        return Result.WIN;
+                        win = true;
                     }
                     cells[r][c].setNeighbour(i, j, cells[rLine][cLine].getNeighbour(i, j) + 1);
                     while (okRow(rLine) && okCol(cLine) && cells[rLine][cLine].getType() == turn) {

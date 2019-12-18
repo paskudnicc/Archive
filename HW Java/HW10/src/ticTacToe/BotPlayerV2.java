@@ -9,7 +9,7 @@ public class BotPlayerV2 implements Player {
         this.k = k;
     }
 
-    public Move move(final Position position, final CellType cell) {
+    public Move move(final LockedPosition position, final CellType cell) {
         int x = 0, y = 0, pMax = -1, tMax = -1;
         Cell temp, emptyCell;
         for (int i = 0; i < n; i++) {

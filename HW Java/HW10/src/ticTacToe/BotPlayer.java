@@ -1,7 +1,6 @@
 package ticTacToe;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class BotPlayer implements Player {
     private final int n, m, k;
@@ -13,7 +12,7 @@ public class BotPlayer implements Player {
         topPlaces = new Cell[k * 2 + 1];
     }
 
-    public Move move(final Position position, final CellType cell) {
+    public Move move(final LockedPosition position, final CellType cell) {
         Arrays.fill(topPlaces, null);
         Cell temp, emptyCell;
         for (int i = 0; i < n; i++) {

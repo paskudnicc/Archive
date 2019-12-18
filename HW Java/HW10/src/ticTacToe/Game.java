@@ -15,7 +15,8 @@ public class Game {
         log(board.getPosition().toString());
         while (true) {
             for (int i = 0; i < players.length; i++) {
-                final int res = move(board, players[(i + round) % players.length], (i + round) % players.length + 1);
+                final int res = move(board, players[(i + round) % players.length],
+                        (i + round) % players.length + 1);
                 if (res != -1) {
                     return res;
                 }
@@ -23,9 +24,8 @@ public class Game {
         }
     }
 
-    private int move(final Board board, final Player player, final int no) {
-        Board fakeBoard = board.copyOf();
-        final Move move = player.move(fakeBoard.getPosition(), fakeBoard.getTurn());
+    private int move(final Board board, final Player player, final int no) { ;
+        final Move move = player.move(board.getPosition(), board.getTurn());
         final Result result = board.makeMove(move);
         log("Player " + no + " move: " + move);
         log(board.toString());

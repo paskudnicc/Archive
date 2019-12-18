@@ -2,6 +2,7 @@ package ticTacToe;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Map;
 
 public class Main {
@@ -27,7 +28,7 @@ public class Main {
                 } else {
                     break;
                 }
-            } catch (Exception e) {}
+            } catch (InputMismatchException e) {}
         }
         while (true) {
             System.out.println("How many players?");
@@ -38,7 +39,7 @@ public class Main {
                 } else {
                     System.out.println("Sorry, but no");
                 }
-            } catch (Exception e) {}
+            } catch (InputMismatchException e) {}
         }
         System.out.println("For each player: h/b/2 (human/bot/bot v.2)???");
         Player[] playerType = new Player[players];
@@ -61,7 +62,7 @@ public class Main {
         }
         int matches;
         while (true) {
-            System.out.println("Matches to win?");
+            System.out.println("First _X_ to win. _X_? ");
             try {
                 matches = in.nextInt();
                 if (matches > 0) {
@@ -69,19 +70,40 @@ public class Main {
                 } else {
                     System.out.println("What is wrong with you?");
                 }
-            } catch (Exception e) {}
+            } catch (InputMismatchException e) {}
         }
         final Game game = new Game(playerType, true);
         int result;
         int[] score = new int[players];
-        int i = 0;
-        while (i < Integer.MAX_VALUE) {
+        int draws = 0;
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
             for (int j = 0; j < players; j++) {
-                System.out.println("Player " + (j + 1) + ": Score: " + score[j] + ", now is playing: " + SYMBOLS.get((j + i) % players));
+                System.out.println("Player " + (j + 1) + ": Score: " + score[j] +
+                        ", now is playing: " + SYMBOLS.get((j + i) % players));
             }
             result = game.play(new TicTacToeBoard(n, m, k, playerType.length), i);
             if (result == 0) {
                 System.out.println("Nobody wins");
+                draws++;
+                if (draws % players == 0) {
+                    boolean win = false;
+                    for (int j = 0; j < players; j++) {
+                        score[j]++;
+                        if (score[j] == matches) {
+                            win = true;
+                        }
+                    }
+                    if (win) {
+                        System.out.println("Game ENDED");
+                        for (int j = 0; j < players; j++) {
+                            System.out.println("Player " + (j + 1) + ": Score: " + score[j]);
+                            if (score[j] == matches) {
+                                System.out.println("Player " + (j + 1) + " got enough points to win");
+                            }
+                        }
+                        break;
+                    }
+                }
             } else {
                 System.out.println("Player " + result + " wins");
                 score[result - 1]++;
@@ -94,7 +116,6 @@ public class Main {
                     break;
                 }
             }
-            i++;
         }
     }
 }

@@ -1,11 +1,9 @@
 package ticTacToe;
 
 public interface Board {
-    Position getPosition();
+    LockedPosition getPosition();
 
     CellType getTurn();
 
     Result makeMove(Move move);
-
-    Board copyOf();
 }

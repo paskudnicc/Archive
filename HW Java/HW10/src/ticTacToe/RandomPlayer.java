@@ -10,7 +10,7 @@ public class RandomPlayer implements Player {
         this.m = m;
     }
 
-    public Move move(final Position position, final CellType cell) {
+    public Move move(final LockedPosition position, final CellType cell) {
         while (true) {
             int r = new Random().nextInt(n);
             int c = new Random().nextInt(m);
