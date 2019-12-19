@@ -1,16 +1,31 @@
 package ticTacToe;
 
+import java.util.Random;
+
 public class BotPlayerV2 implements Player {
     private final int n, m, k;
+    private Random random;
+    private int x = -1, y = -1;
 
     public BotPlayerV2(int n, int m, int k) {
         this.n = n;
         this.m = m;
         this.k = k;
+        this.random = new Random();
+    }
+
+    private void writeMove(Cell cell, boolean priority) {
+        if (priority) {
+            x = cell.getXPos();
+            y = cell.getYPos();
+        } else if (random.nextBoolean()) {
+            x = cell.getXPos();
+            y = cell.getYPos();
+        }
     }
 
     public Move move(final LockedPosition position, final CellType cell) {
-        int x = 0, y = 0, pMax = -1, tMax = -1;
+        int pMax = -1, tMax = -1;
         Cell temp, emptyCell;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -33,39 +48,39 @@ public class BotPlayerV2 implements Player {
                             if (temp.getNeighbour(it, jt) * 2 + 2 > pMax) {
                                 pMax = temp.getNeighbour(it, jt) * 2 + 2;
                                 tMax = type;
-                                x = emptyCell.getXPos();
-                                y = emptyCell.getYPos();
+                                writeMove(emptyCell, true);
                             } else if (temp.getNeighbour(it, jt) * 2 + 2 == pMax) {
                                 if (type > tMax) {
                                     tMax = type;
-                                    x = emptyCell.getXPos();
-                                    y = emptyCell.getYPos();
+                                    writeMove(emptyCell, true);
+                                } else if (type == tMax) {
+                                    writeMove(emptyCell, false);
                                 }
                             }
                         } else if (temp.getType() == CellType.E) {
                             if (0 > pMax) {
                                 pMax = 0;
                                 tMax = type;
-                                x = emptyCell.getXPos();
-                                y = emptyCell.getYPos();
+                                writeMove(emptyCell, true);
                             } else if (0 == pMax) {
                                 if (type > tMax) {
                                     tMax = type;
-                                    x = emptyCell.getXPos();
-                                    y = emptyCell.getYPos();
+                                    writeMove(emptyCell, true);
+                                } else if (type == tMax) {
+                                    writeMove(emptyCell, false);
                                 }
                             }
                         } else {
                             if (temp.getNeighbour(it, jt) * 2 + 1 > pMax) {
                                 pMax = temp.getNeighbour(it, jt) * 2 + 1;
                                 tMax = type;
-                                x = emptyCell.getXPos();
-                                y = emptyCell.getYPos();
+                                writeMove(emptyCell, true);
                             } else if (temp.getNeighbour(it, jt) * 2 + 1 == pMax) {
                                 if (type > tMax) {
                                     tMax = type;
-                                    x = emptyCell.getXPos();
-                                    y = emptyCell.getYPos();
+                                    writeMove(emptyCell, true);
+                                } else if (type == tMax) {
+                                    writeMove(emptyCell, false);
                                 }
                             }
                         }
@@ -73,8 +88,6 @@ public class BotPlayerV2 implements Player {
                 }
             }
         }
-        System.out.println(pMax);
-        System.out.println(tMax);
         return new Move(x, y, cell);
     }
 }

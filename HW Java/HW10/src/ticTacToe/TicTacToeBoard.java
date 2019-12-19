@@ -8,16 +8,17 @@ public class TicTacToeBoard implements Board, Position {
     private final int players;
 
     public TicTacToeBoard(int n, int m, int k, int players) {
+        this.t = n * m;
         if (!(players > 1 &&
-            players < 5 &&
-            n > 1 &&
-            m > 1 &&
-            k > 1 &&
-            k <= Integer.max(n, m))) throw new IllegalArgumentException("Invalid board parameters");
+                players < 5 &&
+                n > 0 &&
+                m > 0 &&
+                t > 1 &&
+                k > 1 &&
+                k <= Integer.max(n, m))) throw new IllegalArgumentException("Invalid board parameters");
         this.players = players;
         this.n = n;
         this.m = m;
-        this.t = n * m;
         this.k = k;
         this.cells = new Cell[n][m];
         for (int i = 0; i < n; i++) {
@@ -48,11 +49,11 @@ public class TicTacToeBoard implements Board, Position {
         if (!isValid(move)) {
             return Result.BROKEN;
         }
-        t -= 1;
+        t--;
+        Result result = Result.UNKNOWN;
         if (t == 0) {
-            return Result.DRAW;
+            result = Result.DRAW;
         }
-        boolean win = false;
         int r = move.getRow();
         int c = move.getColumn();
         cells[r][c].setType(move.getValue());
@@ -69,7 +70,7 @@ public class TicTacToeBoard implements Board, Position {
                     int rLine = r + i;
                     int cLine = c + j;
                     if (cells[rLine][cLine].getNeighbour(i, j) + newCells + 1 >= k) {
-                        win = true;
+                        result = Result.WIN;
                     }
                     cells[r][c].setNeighbour(i, j, cells[rLine][cLine].getNeighbour(i, j) + 1);
                     while (okRow(rLine) && okCol(cLine) && cells[rLine][cLine].getType() == turn) {
@@ -79,6 +80,9 @@ public class TicTacToeBoard implements Board, Position {
                     }
                 }
             }
+        }
+        if (result != Result.UNKNOWN) {
+            return result;
         }
         switch (turn) {
             case X:

@@ -21,7 +21,7 @@ public class Main {
                 n = in.nextInt();
                 m = in.nextInt();
                 k = in.nextInt();
-                if (n < 2 || m < 2 || k < 2) {
+                if (n < 1 || m < 1 || k < 2 || n * m < 2) {
                     System.out.println("Too small");
                 } else if (k > Integer.max(n, m)) {
                     System.out.println("k is too big. Impossible to win");
@@ -62,7 +62,7 @@ public class Main {
         }
         int matches;
         while (true) {
-            System.out.println("First _X_ to win. _X_? ");
+            System.out.println("First _X_ to win. X? ");
             try {
                 matches = in.nextInt();
                 if (matches > 0) {
@@ -79,7 +79,7 @@ public class Main {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             for (int j = 0; j < players; j++) {
                 System.out.println("Player " + (j + 1) + ": Score: " + score[j] +
-                        ", now is playing: " + SYMBOLS.get((j + i) % players));
+                        ", current figure: " + SYMBOLS.get((players * i + j - i) % players));
             }
             result = game.play(new TicTacToeBoard(n, m, k, playerType.length), i);
             if (result == 0) {
@@ -98,7 +98,7 @@ public class Main {
                         for (int j = 0; j < players; j++) {
                             System.out.println("Player " + (j + 1) + ": Score: " + score[j]);
                             if (score[j] == matches) {
-                                System.out.println("Player " + (j + 1) + " got enough points to win");
+                                System.out.println("Player " + (j + 1) + " got enough points (with draws)");
                             }
                         }
                         break;
