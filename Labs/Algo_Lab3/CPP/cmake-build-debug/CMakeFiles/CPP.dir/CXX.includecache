@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/bunker/Documents/GitHub/Study/Labs/Algo_Lab3/CPP/K.cpp
+iostream
+-
+vector
+-
+fstream
+-
+
