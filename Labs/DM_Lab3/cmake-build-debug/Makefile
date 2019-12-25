@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/kruxx/git/Study/Labs/DM_Lab3/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/98/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/snap/clion/98/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named 24
+
+# Build rule for target.
+24: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 24
+.PHONY : 24
+
+# fast build rule for target.
+24/fast:
+	$(MAKE) -f CMakeFiles/24.dir/build.make CMakeFiles/24.dir/build
+.PHONY : 24/fast
+
+#=============================================================================
 # Target rules for targets named 7
 
 # Build rule for target.
@@ -124,44 +137,71 @@ depend:
 .PHONY : 7/fast
 
 #=============================================================================
-# Target rules for targets named 10
+# Target rules for targets named 13
 
 # Build rule for target.
-10: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 10
-.PHONY : 10
+13: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 13
+.PHONY : 13
 
 # fast build rule for target.
-10/fast:
-	$(MAKE) -f CMakeFiles/10.dir/build.make CMakeFiles/10.dir/build
-.PHONY : 10/fast
+13/fast:
+	$(MAKE) -f CMakeFiles/13.dir/build.make CMakeFiles/13.dir/build
+.PHONY : 13/fast
 
-10.o: 10.cpp.o
+13.o: 13.cpp.o
 
-.PHONY : 10.o
+.PHONY : 13.o
 
 # target to build an object file
-10.cpp.o:
-	$(MAKE) -f CMakeFiles/10.dir/build.make CMakeFiles/10.dir/10.cpp.o
-.PHONY : 10.cpp.o
+13.cpp.o:
+	$(MAKE) -f CMakeFiles/13.dir/build.make CMakeFiles/13.dir/13.cpp.o
+.PHONY : 13.cpp.o
 
-10.i: 10.cpp.i
+13.i: 13.cpp.i
 
-.PHONY : 10.i
+.PHONY : 13.i
 
 # target to preprocess a source file
-10.cpp.i:
-	$(MAKE) -f CMakeFiles/10.dir/build.make CMakeFiles/10.dir/10.cpp.i
-.PHONY : 10.cpp.i
+13.cpp.i:
+	$(MAKE) -f CMakeFiles/13.dir/build.make CMakeFiles/13.dir/13.cpp.i
+.PHONY : 13.cpp.i
 
-10.s: 10.cpp.s
+13.s: 13.cpp.s
 
-.PHONY : 10.s
+.PHONY : 13.s
 
 # target to generate assembly for a file
-10.cpp.s:
-	$(MAKE) -f CMakeFiles/10.dir/build.make CMakeFiles/10.dir/10.cpp.s
-.PHONY : 10.cpp.s
+13.cpp.s:
+	$(MAKE) -f CMakeFiles/13.dir/build.make CMakeFiles/13.dir/13.cpp.s
+.PHONY : 13.cpp.s
+
+24.o: 24.cpp.o
+
+.PHONY : 24.o
+
+# target to build an object file
+24.cpp.o:
+	$(MAKE) -f CMakeFiles/24.dir/build.make CMakeFiles/24.dir/24.cpp.o
+.PHONY : 24.cpp.o
+
+24.i: 24.cpp.i
+
+.PHONY : 24.i
+
+# target to preprocess a source file
+24.cpp.i:
+	$(MAKE) -f CMakeFiles/24.dir/build.make CMakeFiles/24.dir/24.cpp.i
+.PHONY : 24.cpp.i
+
+24.s: 24.cpp.s
+
+.PHONY : 24.s
+
+# target to generate assembly for a file
+24.cpp.s:
+	$(MAKE) -f CMakeFiles/24.dir/build.make CMakeFiles/24.dir/24.cpp.s
+.PHONY : 24.cpp.s
 
 7.o: 7.cpp.o
 
@@ -196,13 +236,17 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... 7"
 	@echo "... rebuild_cache"
-	@echo "... 10"
-	@echo "... 10.o"
-	@echo "... 10.i"
-	@echo "... 10.s"
+	@echo "... 24"
+	@echo "... 7"
+	@echo "... edit_cache"
+	@echo "... 13"
+	@echo "... 13.o"
+	@echo "... 13.i"
+	@echo "... 13.s"
+	@echo "... 24.o"
+	@echo "... 24.i"
+	@echo "... 24.s"
 	@echo "... 7.o"
 	@echo "... 7.i"
 	@echo "... 7.s"

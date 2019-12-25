@@ -33,6 +33,9 @@ public class Operation implements PriorityRanked {
             case "*":
                 return a * b;
             case "/":
+                if (b == 0) {
+                    throw new ArithmeticException("Division by zero");
+                }
                 return a / b;
             default:
                 return -1;

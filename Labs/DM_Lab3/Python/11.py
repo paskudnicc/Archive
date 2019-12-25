@@ -12,7 +12,7 @@ print()
 def razb(t):
     for i in range(t + 1, n + 1):
         ans.append(i)
-        print(*ans, sep=' ')
+        print(*ans)
         razb(i)
         ans.pop()
 

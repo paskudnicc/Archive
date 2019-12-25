@@ -5,7 +5,7 @@ public abstract class MathExpression implements MathObject {
     private MathObject right;
     private Operation operation;
 
-    public MathExpression(MathObject r, MathObject l, String type) {
+    protected MathExpression(MathObject r, MathObject l, String type) {
         this.left = r;
         this.right = l;
         this.operation = new Operation(type);
